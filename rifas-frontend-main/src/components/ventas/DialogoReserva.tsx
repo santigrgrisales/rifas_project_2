@@ -74,9 +74,9 @@ export default function DialogoReserva({
       setPaso('completado')
 
       // Notificar después de 2 segundos
-      setTimeout(() => {
-        onReservaCompletada()
-      }, 2000)
+      // setTimeout(() => {
+      //   onReservaCompletada()
+      // }, 2000)
     } catch (error: any) {
       console.error('Error procesando reserva:', error)
       setError(error.message || 'Error procesando la reserva')
@@ -87,14 +87,18 @@ export default function DialogoReserva({
   }
 
   const handleClose = () => {
-    if (!procesando) {
-      setError(null)
-      setPaso('confirmacion')
-      setDiasBloqueo(5)
-      setNotas('')
-      onClose()
+  if (!procesando) {
+    if (paso === 'completado') {
+      onReservaCompletada()
     }
+
+    setError(null)
+    setPaso('confirmacion')
+    setDiasBloqueo(5)
+    setNotas('')
+    onClose()
   }
+}
 
   // Estado procesando
   if (paso === 'procesando') {

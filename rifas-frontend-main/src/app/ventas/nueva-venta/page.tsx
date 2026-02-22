@@ -195,7 +195,7 @@ export default function VentasPage() {
     setPasoActual('seleccionar-boletas')
     
     // Opcional: mostrar notificación de éxito
-    alert('¡Venta completada exitosamente!')
+    // alert('¡Venta completada exitosamente!')
   }
 
   // Volver al paso anterior

@@ -10333,3 +10333,14 @@
 {"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T17:15:04.498Z"}
 {"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T17:15:04.526Z"}
 {"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T17:15:04.533Z"}
+{"level":"info","message":"[JOBS] Starting boletaExpirationJob (runs every 300s)","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.316Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.543Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.611Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.612Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.620Z"}
+{"level":"info","message":"Database connection established successfully","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.626Z"}
+{"level":"info","message":"Server running on port 3000 in development mode","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.632Z"}
+{"level":"info","message":"Health check available at http://localhost:3000/health","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.633Z"}
+{"level":"info","message":"API documentation at http://localhost:3000/api","service":"rifas-backend","timestamp":"2026-02-22T17:37:03.633Z"}
+{"level":"info","message":"POST /api/auth/login - ::1","service":"rifas-backend","timestamp":"2026-02-22T17:38:42.425Z"}
+{"level":"info","message":"POST /api/auth/login - ::1","service":"rifas-backend","timestamp":"2026-02-22T17:38:51.600Z"}
