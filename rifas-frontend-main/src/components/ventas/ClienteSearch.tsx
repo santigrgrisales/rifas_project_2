@@ -48,22 +48,22 @@ export default function ClienteSearch({
       try {
         let response
         
-        if (tipoBusqueda === 'CEDULA' && cedulaBusqueda.trim()) {
+        if (tipoBusqueda === 'CEDULA' && cedulaBusqueda.length >= 7)  {
           // Búsqueda específica por cédula
           response = await ventasApi.buscarClientePorCedula(cedulaBusqueda.trim())
           setResultados([response.data])
         } else if (tipoBusqueda === 'GENERAL' && busqueda.length >= 3) {
           // Búsqueda general
-          response = await ventasApi.buscarClientes(busqueda)
-          setResultados(response.data.clientes || [])
+         const response = await ventasApi.buscarClientes(busqueda)
+          setResultados(response.data || [])
         } else {
           setResultados([])
           setLoading(false)
           return
         }
       } catch (error) {
-        console.error('Error buscando clientes:', error)
-        setError('Error buscando clientes')
+        // console.error('Error buscando clientes:', error)
+        // setError('Error buscando clientes')
         setResultados([])
       } finally {
         setLoading(false)
@@ -91,7 +91,13 @@ export default function ClienteSearch({
       console.log('Cliente creado exitosamente:', nuevoCliente)
       
       // Llamar al callback con el cliente creado
-      onClienteCreated(nuevoCliente)
+      // Seleccionar automáticamente el cliente recién creado
+      onClienteSelected(nuevoCliente)
+
+    //   // Notificar creación si existe callback
+    //   if (onClienteCreated) {
+    //   onClienteCreated(nuevoCliente)
+    //  }
       
       // Marcar como creado exitosamente
       setClienteCreadoExitosamente(true)

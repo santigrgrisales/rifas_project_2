@@ -399,16 +399,14 @@ export default function VentasPage() {
             {pasoActual === 'datos-cliente' && (
               <div className="space-y-6">
                 <ClienteSearch
-                  onClienteSelected={(clienteSeleccionado) => {
-                    console.log('Cliente seleccionado:', clienteSeleccionado)
-                    setCliente(clienteSeleccionado)
-                    setPasoActual('resumen')
-                  }}
-                  onClienteCreated={(clienteCreado) => {
-                    console.log('Cliente creado:', clienteCreado)
-                    setCliente(clienteCreado)
-                    setPasoActual('resumen')
-                  }}
+                 onClienteSelected={(clienteSeleccionado) => {
+                 console.log('Cliente seleccionado:', clienteSeleccionado)
+                 setCliente(clienteSeleccionado)
+
+                 setTimeout(() => {
+                 setPasoActual('resumen')
+                 }, 0)
+                 }}
                 />
                 
                 {/* Botón para volver */}
@@ -424,7 +422,7 @@ export default function VentasPage() {
             )}
 
             {/* Paso 4: Resumen y Venta */}
-            {pasoActual === 'resumen' && rifaSeleccionada && cliente && cliente.nombre.trim() !== '' && (
+             {pasoActual === 'resumen' && rifaSeleccionada&& (
               <div className="space-y-6">
                 <ClienteSeleccionado
                   cliente={cliente}

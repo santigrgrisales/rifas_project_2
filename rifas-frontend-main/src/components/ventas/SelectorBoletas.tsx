@@ -137,8 +137,10 @@ intervalosRef.current.set(boleta.id, intervalId)
 
       
     } catch (error) {
-      setError(`Error al bloquear boleta ${boleta.numero}`)
+      setError(`La boleta #${boleta.numero} ya fue seleccionada por otro usuario. Por favor elige otra boleta.`)
       console.error('Error bloqueando boleta:', error)
+      // refrescar lista inmediatamente
+      // cargarBoletasDisponibles()
     } finally {
       setBloqueando(prev => {
         const newSet = new Set(prev)
@@ -257,7 +259,7 @@ useEffect(() => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-medium text-slate-900">Seleccionar Boletas</h2>
+        <h2 className="text-lg font-medium text-slate-900">Seleccionar Boletas Disponibles</h2>
         <div className="flex items-center space-x-4">
           <div className="text-sm text-slate-600">
             <span className="font-medium">{boletasDisponibles?.length || 0}</span> disponibles

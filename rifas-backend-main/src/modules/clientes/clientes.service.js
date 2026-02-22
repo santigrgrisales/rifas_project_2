@@ -138,7 +138,12 @@ class ClienteService {
       // Búsqueda por nombre o email
       if (search) {
         paramCount++;
-        whereClause = `WHERE nombre ILIKE $${paramCount} OR email ILIKE $${paramCount}`;
+        whereClause = `
+    WHERE nombre ILIKE $${paramCount}
+       OR email ILIKE $${paramCount}
+       OR telefono ILIKE $${paramCount}
+       OR identificacion ILIKE $${paramCount}
+  `;
         queryParams.push(`%${search}%`);
       }
       

@@ -166,10 +166,10 @@ class VentasApiService {
   // ---------------- CLIENTES ----------------
 
   async buscarClientes(query: string) {
-    return this.request<{ clientes: Cliente[] }>(
-      `/clientes/search?q=${encodeURIComponent(query)}`
-    )
-  }
+  return this.request<Cliente[]>(
+    `/clientes?search=${encodeURIComponent(query)}`
+  )
+}
 
   async buscarClientePorCedula(cedula: string) {
     return this.request<Cliente>(
