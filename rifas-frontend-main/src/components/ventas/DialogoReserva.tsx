@@ -152,7 +152,7 @@ export default function DialogoReserva({
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Días Bloqueo:</span>
-                    <span className="font-medium text-slate-900">{reservaResponse.dias_bloqueo}</span>
+                    <span className="font-medium text-slate-900">{diasBloqueo}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Bloqueo Hasta:</span>

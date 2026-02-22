@@ -315,7 +315,7 @@ export default function VentasPage() {
               </div>
             </div>
 
-            {/* Sección de Reservas Activas */}
+            {/* Sección de Reservas Activas
             <div className="bg-white rounded-lg shadow-sm border border-slate-200">
               <button
                 onClick={() => setMostrarReservas(!mostrarReservas)}
@@ -343,7 +343,7 @@ export default function VentasPage() {
                   <MisReservas rifaId={rifaSeleccionada?.id} />
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* Contenido del paso actual */}
             {pasoActual === 'seleccionar-rifa' && (
