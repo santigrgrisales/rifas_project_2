@@ -48,12 +48,11 @@ export default function GestionarAbonosPage() {
         {/* Paso 1: Buscar Cliente */}
         {!clienteSeleccionado && (
           <ClienteSearch
+            permitirCrear={false}
             onClienteSelected={(cliente) => {
               setClienteSeleccionado(cliente)
             }}
-            onClienteCreated={(cliente) => {
-              setClienteSeleccionado(cliente)
-            }}
+            
           />
         )}
 

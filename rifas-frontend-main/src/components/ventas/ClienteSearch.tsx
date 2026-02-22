@@ -6,10 +6,15 @@ import { ventasApi } from '@/lib/ventasApi'
 
 interface ClienteSearchProps {
   onClienteSelected: (cliente: Cliente) => void
-  onClienteCreated: (cliente: Cliente) => void
+  onClienteCreated?: (cliente: Cliente) => void
+  permitirCrear?: boolean
 }
 
-export default function ClienteSearch({ onClienteSelected, onClienteCreated }: ClienteSearchProps) {
+export default function ClienteSearch({
+  onClienteSelected,
+  onClienteCreated,
+  permitirCrear = true
+}: ClienteSearchProps) {
   const [modo, setModo] = useState<'BUSCAR' | 'NUEVO'>('BUSCAR')
   const [tipoBusqueda, setTipoBusqueda] = useState<'CEDULA' | 'GENERAL'>('CEDULA')
   const [busqueda, setBusqueda] = useState('')
@@ -26,6 +31,13 @@ export default function ClienteSearch({ onClienteSelected, onClienteCreated }: C
   const [creando, setCreando] = useState(false)
   const [clienteCreadoExitosamente, setClienteCreadoExitosamente] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+
+  useEffect(() => {
+  if (!permitirCrear) {
+    setModo('BUSCAR')
+  }
+}, [permitirCrear])
 
   // Buscar clientes cuando cambia la búsqueda
   useEffect(() => {
@@ -119,6 +131,7 @@ export default function ClienteSearch({ onClienteSelected, onClienteCreated }: C
       <h2 className="text-lg font-medium text-slate-900 mb-6">Datos del Cliente</h2>
       
       {/* Tabs para cambiar modo */}
+      {permitirCrear && (
       <div className="flex space-x-1 mb-6 bg-slate-100 p-1 rounded-lg">
         <button
           onClick={() => {
@@ -149,7 +162,7 @@ export default function ClienteSearch({ onClienteSelected, onClienteCreated }: C
           Nuevo Cliente
         </button>
       </div>
-
+      )}
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
           {error}
@@ -167,7 +180,7 @@ export default function ClienteSearch({ onClienteSelected, onClienteCreated }: C
         </div>
       )}
 
-      {modo === 'BUSCAR' ? (
+      {!permitirCrear || modo === 'BUSCAR' ? (
         <div className="space-y-4">
           {/* Tabs para tipo de búsqueda */}
           <div className="flex space-x-1 mb-4 bg-slate-50 p-1 rounded-lg">
@@ -379,6 +392,8 @@ export default function ClienteSearch({ onClienteSelected, onClienteCreated }: C
           </button>
         </div>
       )}
+
+      
     </div>
   )
 }
