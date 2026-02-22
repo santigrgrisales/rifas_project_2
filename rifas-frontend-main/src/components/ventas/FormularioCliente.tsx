@@ -55,9 +55,9 @@ export default function FormularioCliente({
 
     setBuscando(true)
     try {
-      const response = await ventasApi.buscarCliente(query)
-      setResultadosBusqueda(response.data)
-      setMostrarResultados(response.data.length > 0)
+      const response = await ventasApi.buscarClientes(query)
+      setResultadosBusqueda(response.data.clientes)
+      setMostrarResultados(response.data.clientes.length > 0)
     } catch (error) {
       console.error('Error buscando cliente:', error)
       setResultadosBusqueda([])

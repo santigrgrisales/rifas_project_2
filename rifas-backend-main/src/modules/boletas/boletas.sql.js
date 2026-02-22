@@ -22,10 +22,40 @@ const SQL_QUERIES = {
   `,
   
   GET_BOLETA_BY_ID: `
-    SELECT b.*, r.nombre as rifa_nombre, u.nombre as vendedor_nombre
+    SELECT 
+      b.*,
+      r.nombre as rifa_nombre,
+      u.nombre as vendedor_nombre,
+      CASE 
+        WHEN (c.id IS NOT NULL OR vc.id IS NOT NULL) THEN 
+          json_build_object(
+            'id', COALESCE(c.id, vc.id),
+            'nombre', COALESCE(c.nombre, vc.nombre),
+            'telefono', COALESCE(c.telefono, vc.telefono),
+            'email', COALESCE(c.email, vc.email),
+            'identificacion', COALESCE(c.identificacion, vc.identificacion)
+          )
+        ELSE NULL 
+      END as cliente_info,
+      CASE 
+        WHEN b.venta_id IS NOT NULL THEN 
+          json_build_object(
+            'id', v.id,
+            'fecha_venta', v.created_at,
+            'total_pagado', v.abono_total,
+            'saldo_pendiente', v.saldo_pendiente,
+            'metodo_pago', COALESCE(mp.nombre, 'N/A'),
+            'estado', v.estado_venta
+          )
+        ELSE NULL 
+      END as venta_info
     FROM boletas b
     LEFT JOIN rifas r ON b.rifa_id = r.id
     LEFT JOIN usuarios u ON b.vendido_por = u.id
+    LEFT JOIN clientes c ON b.cliente_id = c.id
+    LEFT JOIN ventas v ON b.venta_id = v.id
+    LEFT JOIN clientes vc ON v.cliente_id = vc.id
+    LEFT JOIN medios_pago mp ON v.medio_pago_id = mp.id
     WHERE b.id = $1
   `,
   

@@ -6,7 +6,13 @@ import {
   Cliente,
   VentaRequest,
   VentaResponse,
-  RifaStats
+  RifaStats,
+  ReservaRequest,
+  ReservaResponse,
+  ConvertirReservaRequest,
+  ConvertirReservaResponse,
+  CancelarReservaRequest,
+  CancelarReservaResponse
 } from '@/types/ventas'
 
 class VentasApiService {
@@ -49,10 +55,12 @@ class VentasApiService {
 
     if (!response.ok) {
       const serverMessage =
-        data?.message || data?.error || response.statusText
-      throw new Error(
+        data?.message || data?.error || data?.errors || response.statusText
+      const error = new Error(
         `API Error ${response.status}: ${serverMessage}`
-      )
+      ) as any
+      error.response = { data, status: response.status }
+      throw error
     }
 
     return data
@@ -142,17 +150,18 @@ class VentasApiService {
   }
 
   async getVentasPorCliente(clienteId: string) {
-  return this.request<
-    {
-      id: string
-      monto_total: number
-      total_pagado: number
-      saldo_pendiente: number
-      estado: string
-      created_at: string
-    }[]
-  >(`/ventas/cliente/${clienteId}`)
-}
+    // Backend: GET /ventas/cliente/:clienteId → { success, data: [{ id, monto_total, estado_venta, created_at, total_pagado, saldo_pendiente }] }
+    return this.request<
+      {
+        id: number
+        monto_total: number
+        estado_venta: string
+        created_at: string
+        total_pagado: number
+        saldo_pendiente: number
+      }[]
+    >(`/ventas/cliente/${clienteId}`)
+  }
 
   // ---------------- CLIENTES ----------------
 
@@ -255,24 +264,109 @@ async liberarBloqueosMultiples(
   }
 
   async getVentaById(ventaId: string) {
-    return this.request<VentaResponse>(
-      `/ventas/${ventaId}`
-    )
+    // Backend: GET /ventas/:id → { success, data: venta }
+    return this.request<any>(`/ventas/${ventaId}`)
+  }
+
+  /** Detalle financiero de la venta (cliente + abonos + saldo) para módulo Gestionar */
+  async getVentaDetalleFinanciero(ventaId: string) {
+    // Backend: GET /ventas/:id/detalle-financiero → { success, data: { ...venta, nombre, telefono, total_pagado, saldo_pendiente, abonos[] } }
+    return this.request<any>(`/ventas/${ventaId}/detalle-financiero`)
   }
 
   // ---------------- ABONOS ----------------
 
   async registrarAbono(
     ventaId: string,
-    data: { monto: number; metodo_pago?: string }
+    data: { monto: number; metodo_pago: string; notas?: string }
   ) {
+    // Validar y limpiar datos antes de enviar
+    const montoNum = Number(data.monto)
+    if (isNaN(montoNum) || montoNum <= 0) {
+      throw new Error('El monto debe ser un número mayor a 0')
+    }
+
+    const metodoPago = (data.metodo_pago || 'efectivo').trim()
+    if (!metodoPago) {
+      throw new Error('El método de pago es requerido')
+    }
+
+    // Construir payload sin valores undefined/null
+    const payload: Record<string, any> = {
+      monto: montoNum,
+      metodo_pago: metodoPago
+    }
+
+    // Solo agregar notas si tiene contenido
+    if (data.notas && typeof data.notas === 'string' && data.notas.trim()) {
+      payload.notas = data.notas.trim()
+    }
+    
     return this.request<{
       message: string
       venta: VentaResponse
     }>(`/ventas/${ventaId}/abonos`, {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(payload)
     })
+  }
+
+  // ============ RESERVAS ============
+
+  async crearReserva(reservaData: ReservaRequest) {
+    return this.request<ReservaResponse>(`/ventas/reservar`, {
+      method: 'POST',
+      body: JSON.stringify({
+        rifa_id: reservaData.rifa_id,
+        cliente: {
+          nombre: reservaData.cliente.nombre,
+          telefono: reservaData.cliente.telefono,
+          email: reservaData.cliente.email,
+          identificacion: reservaData.cliente.identificacion,
+          direccion: reservaData.cliente.direccion
+        },
+        boletas: reservaData.boletas,
+        dias_bloqueo: reservaData.dias_bloqueo || 5,
+        notas: reservaData.notas
+      })
+    })
+  }
+
+  async convertirReserva(
+    reservaId: string,
+    convertirData: ConvertirReservaRequest
+  ) {
+    return this.request<ConvertirReservaResponse>(
+      `/ventas/${reservaId}/convertir-reserva`,
+      {
+        method: 'POST',
+        body: JSON.stringify(convertirData)
+      }
+    )
+  }
+
+  async cancelarReserva(
+    reservaId: string,
+    cancelarData: CancelarReservaRequest
+  ) {
+    return this.request<CancelarReservaResponse>(
+      `/ventas/${reservaId}/cancelar-reserva`,
+      {
+        method: 'POST',
+        body: JSON.stringify(cancelarData)
+      }
+    )
+  }
+
+  async obtenerReserva(reservaId: string) {
+    return this.request<ReservaResponse>(`/ventas/${reservaId}`)
+  }
+
+  async listarReservasActivas(rifaId?: string) {
+    const endpoint = rifaId
+      ? `/ventas/reservas/activas?rifa_id=${rifaId}`
+      : `/ventas/reservas/activas`
+    return this.request<ReservaResponse[]>(endpoint)
   }
 
 }

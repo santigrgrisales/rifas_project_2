@@ -9,6 +9,7 @@ import SelectorBoletas from '@/components/ventas/SelectorBoletas'
 import ClienteSearch from '@/components/ventas/ClienteSearch'
 import ClienteSeleccionado from '@/components/ventas/ClienteSeleccionado'
 import CarritoVentas from '@/components/ventas/CarritoVentas'
+import MisReservas from '@/components/ventas/MisReservas'
 import { RealTimeNotifications } from '@/components/ventas/RealTimeNotifications'
 import { useVentasRealTime } from '@/hooks/useWebSocket'
 
@@ -56,6 +57,7 @@ export default function VentasPage() {
   // Estado del flujo de ventas
   const [pasoActual, setPasoActual] = useState<'seleccionar-rifa' | 'seleccionar-boletas' | 'datos-cliente' | 'resumen'>('seleccionar-rifa')
   const [boletasSeleccionadas, setBoletasSeleccionadas] = useState<BoletaEnCarrito[]>([])
+  const [mostrarReservas, setMostrarReservas] = useState(false)
   const [cliente, setCliente] = useState<Cliente>({
     nombre: '',
     telefono: '',
@@ -311,6 +313,36 @@ export default function VentasPage() {
                 <span>4</span>
                 <span>Resumen</span>
               </div>
+            </div>
+
+            {/* Sección de Reservas Activas */}
+            <div className="bg-white rounded-lg shadow-sm border border-slate-200">
+              <button
+                onClick={() => setMostrarReservas(!mostrarReservas)}
+                className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">📌</span>
+                  <div className="text-left">
+                    <h3 className="font-medium text-slate-900">Mis Reservas Activas</h3>
+                    <p className="text-sm text-slate-600">Gestiona tus boletas bloqueadas</p>
+                  </div>
+                </div>
+                <svg
+                  className={`w-5 h-5 text-slate-600 transition-transform ${mostrarReservas ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </button>
+
+              {mostrarReservas && (
+                <div className="border-t border-slate-200 p-6">
+                  <MisReservas rifaId={rifaSeleccionada?.id} />
+                </div>
+              )}
             </div>
 
             {/* Contenido del paso actual */}

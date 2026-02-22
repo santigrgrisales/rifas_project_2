@@ -5,11 +5,11 @@ import RegistrarAbono from './RegistrarAbono'
 import { ventasApi } from '@/lib/ventasApi'
 
 interface VentaPendiente {
-  id: string
+  id: number
   monto_total: number
   total_pagado: number
   saldo_pendiente: number
-  estado: string
+  estado_venta: string
   created_at: string
 }
 
@@ -95,7 +95,7 @@ export default function ListaVentasPendientes({ clienteId }: Props) {
               >
                 <div className="space-y-1">
                   <p className="font-medium text-slate-900">
-                    Venta #{venta.id.slice(0, 8)}
+                    Venta #{venta.id}
                   </p>
 
                   <p className="text-sm text-slate-500">
@@ -130,7 +130,7 @@ export default function ListaVentasPendientes({ clienteId }: Props) {
 
       {ventaSeleccionada && (
         <RegistrarAbono
-          ventaId={ventaSeleccionada.id}
+          ventaId={ventaSeleccionada.id.toString()}
           onBack={() => {
             setVentaSeleccionada(null)
             fetchVentas() // 🔥 refresca correctamente después de volver

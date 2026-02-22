@@ -155,20 +155,39 @@ export function useVentasRealTime(rifaId: string) {
   const ws = useWebSocket({
     rifaId,
     onBoletaBloqueada: useCallback((event: BoletaBloqueadaEvent) => {
-      setEventosRecientes((prev: WebSocketEvent[]) => [event, ...prev.slice(0, 9)]) // Mantener últimos 10 eventos
-      // Aquí puedes agregar notificaciones toast, sonidos, etc.
+      const wsEvent: WebSocketEvent = {
+        type: 'BOLETA_BLOQUEADA',
+        data: event,
+        timestamp: new Date().toISOString()
+      }
+      setEventosRecientes((prev) => [wsEvent, ...prev.slice(0, 9)]) // Mantener últimos 10 eventos
       console.log('Boleta bloqueada en tiempo real:', event)
     }, []),
     onBoletaDesbloqueada: useCallback((event: BoletaBloqueadaEvent) => {
-      setEventosRecientes((prev: WebSocketEvent[]) => [event, ...prev.slice(0, 9)])
+      const wsEvent: WebSocketEvent = {
+        type: 'BOLETA_DESBLOQUEADA',
+        data: event,
+        timestamp: new Date().toISOString()
+      }
+      setEventosRecientes((prev) => [wsEvent, ...prev.slice(0, 9)])
       console.log('Boleta desbloqueada en tiempo real:', event)
     }, []),
     onBoletaVendida: useCallback((event: BoletaVendidaEvent) => {
-      setEventosRecientes((prev: WebSocketEvent[]) => [event, ...prev.slice(0, 9)])
+      const wsEvent: WebSocketEvent = {
+        type: 'BOLETA_VENDIDA',
+        data: event,
+        timestamp: new Date().toISOString()
+      }
+      setEventosRecientes((prev) => [wsEvent, ...prev.slice(0, 9)])
       console.log('Boleta vendida en tiempo real:', event)
     }, []),
     onVentaCompletada: useCallback((event: any) => {
-      setEventosRecientes((prev: WebSocketEvent[]) => [event, ...prev.slice(0, 9)])
+      const wsEvent: WebSocketEvent = {
+        type: 'VENTA_COMPLETADA',
+        data: event,
+        timestamp: new Date().toISOString()
+      }
+      setEventosRecientes((prev) => [wsEvent, ...prev.slice(0, 9)])
       console.log('Venta completada en tiempo real:', event)
     }, [])
   })

@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { ventasApi } from '@/lib/ventasApi'
 import { BoletaEnCarrito, Cliente, VentaRequest } from '@/types/ventas'
+import DialogoReserva from './DialogoReserva'
 
 interface CarritoVentasProps {
   boletas: BoletaEnCarrito[]
@@ -28,9 +30,10 @@ export default function CarritoVentas({
   const [paso, setPaso] = useState<'resumen' | 'procesando' | 'completado' | 'error'>('resumen')
   
   // Estados para abonos parciales
-  const [tipoVenta, setTipoVenta] = useState<'COMPLETA' | 'ABONO'>('COMPLETA')
+  const [tipoVenta, setTipoVenta] = useState<'COMPLETA' | 'ABONO' | 'RESERVA'>('COMPLETA')
   const [montoAbono, setMontoAbono] = useState<number>(0)
   const [ventaResponse, setVentaResponse] = useState<any>(null)
+  const [mostrarDialogoReserva, setMostrarDialogoReserva] = useState(false)
 
   // Calcular totales
   const subtotal = boletas.length * precioBoleta
@@ -101,13 +104,8 @@ export default function CarritoVentas({
       const response = await ventasApi.crearVenta(ventaData)
       setVentaResponse(response.data)
       
-      // Éxito
+      // Éxito — el usuario permanece en la pantalla para ver/imprimir boletas
       setPaso('completado')
-      
-      // Notificar al componente padre
-      setTimeout(() => {
-        onVentaCompletada()
-      }, 2000)
       
     } catch (error: any) {
       console.error('Error procesando venta:', error)
@@ -167,70 +165,140 @@ export default function CarritoVentas({
   }
 
   if (paso === 'completado') {
+    const esPagoCompleto = tipoVenta === 'COMPLETA'
+
     return (
       <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-        <div className="text-center py-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
-            <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+
+        {/* ── Encabezado de éxito ── */}
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
+            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-slate-900 mb-2">
-            {tipoVenta === 'ABONO' ? '¡Venta con Abono Creada!' : '¡Venta Completada!'}
+          <h3 className="text-xl font-semibold text-slate-900 mb-1">
+            {esPagoCompleto ? '¡Venta Completada y Pagada!' : '¡Venta con Abono Creada!'}
           </h3>
-          <p className="text-slate-600 mb-4">
-            {tipoVenta === 'ABONO' 
-              ? 'La venta con abono se ha procesado exitosamente'
-              : 'La venta se ha procesado exitosamente'
-            }
+          <p className="text-slate-600 text-sm">
+            {esPagoCompleto
+              ? 'La venta se registró exitosamente. Ya puedes entregar las boletas al cliente.'
+              : 'La venta con abono se ha procesado exitosamente.'}
           </p>
-          
-          {/* Mostrar detalles de la venta si hay respuesta */}
-          {ventaResponse && (
-            <div className="bg-slate-50 rounded-lg p-4 mb-4 text-left max-w-md mx-auto">
-              <h4 className="font-medium text-slate-900 mb-3">Detalles de la Venta</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-slate-600">ID Venta:</span>
-                  <span className="font-mono text-slate-900">{ventaResponse.id?.slice(0, 8)}...</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-600">Total:</span>
-                  <span className="font-medium text-slate-900">${total.toLocaleString()}</span>
-                </div>
-                {tipoVenta === 'ABONO' && (
-                  <>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">Abono:</span>
-                      <span className="font-medium text-green-600">${montoAbono.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">Saldo Pendiente:</span>
-                      <span className="font-medium text-orange-600">${saldoPendiente.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600">Estado:</span>
-                      <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
-                        PENDIENTE
-                      </span>
-                    </div>
-                  </>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-slate-600">Cliente:</span>
-                  <span className="font-medium text-slate-900">{ventaResponse.cliente_nombre}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-600">Boletas:</span>
-                  <span className="font-medium text-slate-900">{boletas.length}</span>
-                </div>
+        </div>
+
+        {/* ── Resumen financiero ── */}
+        {ventaResponse && (
+          <div className="bg-slate-50 rounded-lg p-4 mb-6 max-w-md mx-auto text-sm">
+            <h4 className="font-medium text-slate-900 mb-3">Resumen de la Venta</h4>
+            <div className="space-y-1.5">
+              <div className="flex justify-between">
+                <span className="text-slate-500">ID Venta:</span>
+                <span className="font-mono text-slate-800">{ventaResponse.id?.slice(0, 8)}...</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">Cliente:</span>
+                <span className="font-medium text-slate-800">{cliente.nombre}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">Total:</span>
+                <span className="font-medium text-slate-800">${total.toLocaleString()}</span>
+              </div>
+              {!esPagoCompleto && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Abono inicial:</span>
+                    <span className="font-medium text-green-600">${montoAbono.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Saldo pendiente:</span>
+                    <span className="font-medium text-orange-600">${saldoPendiente.toLocaleString()}</span>
+                  </div>
+                </>
+              )}
+              <div className="flex justify-between">
+                <span className="text-slate-500">Boletas:</span>
+                <span className="font-medium text-slate-800">{boletas.length}</span>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* ── Cards de boletas (usa los datos del carrito, disponibles en memoria) ── */}
+        {boletas.length > 0 && (
+          <div className="mb-6">
+            <h4 className="text-sm font-medium text-slate-700 mb-3 text-center">
+              Boletas {esPagoCompleto ? 'pagadas' : 'con abono'} ({boletas.length})
+            </h4>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 max-w-2xl mx-auto">
+              {boletas.map((boleta) => (
+                <div
+                  key={boleta.id}
+                  className={`border-2 rounded-xl p-3 text-center flex flex-col items-center gap-2 ${
+                    esPagoCompleto
+                      ? 'border-green-200 bg-green-50'
+                      : 'border-amber-200 bg-amber-50'
+                  }`}
+                >
+                  <div className="text-xl font-bold text-slate-800">
+                    #{boleta.numero.toString().padStart(4, '0')}
+                  </div>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                      esPagoCompleto
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-amber-100 text-amber-700'
+                    }`}
+                  >
+                    {esPagoCompleto ? 'PAGADA' : 'ABONADA'}
+                  </span>
+                  {(boleta.imagen_url || boleta.qr_url) && (
+                    <div className="h-12 flex items-center justify-center">
+                      <img
+                        src={boleta.imagen_url || boleta.qr_url}
+                        alt={`Boleta ${boleta.numero}`}
+                        className="max-h-10 w-auto object-contain"
+                      />
+                    </div>
+                  )}
+                  <div className="text-xs text-slate-500">${boleta.precio.toLocaleString()}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Acciones ── */}
+        <div className="flex flex-col items-center gap-3">
+
+          {/* Botón Ver / Imprimir: solo cuando pago completo */}
+          {esPagoCompleto && ventaResponse?.id && (
+            <Link
+              href={`/ventas/${ventaResponse.id}/boletas`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Ver / Imprimir Boletas
+            </Link>
           )}
-          
+
+          {/* Nota para ventas con abono */}
+          {!esPagoCompleto && (
+            <p className="text-sm text-slate-500 text-center max-w-sm">
+              💡 Podrás imprimir las boletas una vez se salde el total en{' '}
+              <strong>Ventas → Gestionar</strong>.
+            </p>
+          )}
+
+          {/* Nueva venta — única forma de salir de esta pantalla */}
           <button
             onClick={onVentaCompletada}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors"
           >
             Nueva Venta
           </button>
@@ -290,29 +358,43 @@ export default function CarritoVentas({
 
       {/* Tipo de Venta */}
       <div className="mb-6">
-        <h3 className="text-sm font-medium text-slate-700 mb-3">Tipo de Venta</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <h3 className="text-sm font-medium text-slate-700 mb-3">Tipo de Operación</h3>
+        <div className="grid grid-cols-3 gap-3">
           <button
             onClick={() => setTipoVenta('COMPLETA')}
+            disabled={procesando}
             className={`p-4 border-2 rounded-lg transition-all ${
               tipoVenta === 'COMPLETA'
                 ? 'border-blue-500 bg-blue-50 text-blue-700'
                 : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
             }`}
           >
-            <div className="font-medium">Venta Completa</div>
-            <div className="text-sm text-slate-600 mt-1">Pago total de ${total.toLocaleString()}</div>
+            <div className="font-medium text-sm">Venta Completa</div>
+            <div className="text-xs text-slate-600 mt-1">Pago total</div>
           </button>
           <button
             onClick={() => setTipoVenta('ABONO')}
+            disabled={procesando}
             className={`p-4 border-2 rounded-lg transition-all ${
               tipoVenta === 'ABONO'
                 ? 'border-blue-500 bg-blue-50 text-blue-700'
                 : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
             }`}
           >
-            <div className="font-medium">Venta con Abono</div>
-            <div className="text-sm text-slate-600 mt-1">Separar con pago parcial</div>
+            <div className="font-medium text-sm">Con Abono</div>
+            <div className="text-xs text-slate-600 mt-1">Pago parcial</div>
+          </button>
+          <button
+            onClick={() => setTipoVenta('RESERVA')}
+            disabled={procesando}
+            className={`p-4 border-2 rounded-lg transition-all ${
+              tipoVenta === 'RESERVA'
+                ? 'border-blue-500 bg-blue-50 text-blue-700'
+                : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+            }`}
+          >
+            <div className="font-medium text-sm">📌 Reservar</div>
+            <div className="text-xs text-slate-600 mt-1">Bloquear boletas</div>
           </button>
         </div>
       </div>
@@ -382,39 +464,42 @@ export default function CarritoVentas({
         </div>
       </div>
 
-      {/* Método de pago */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-700 mb-2">
-          Método de Pago
-        </label>
-        <select
-  value={medioPagoId}
-  onChange={(e) => setMedioPagoId(e.target.value)}
-  disabled={procesando}
-  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
->
-  <option value="d397d917-c0d0-4c61-b2b3-2ebfab7deeb7">Efectivo</option>
-  <option value="af6e15fc-c52c-4491-abe1-20243af301c4">Nequi</option>
-  <option value="db94562d-bb01-42a3-9414-6e369a1a70ba">PSE</option>
-  <option value="57a2f560-b3d7-4fa8-91cf-24e6b2a6d7ff">Tarjeta Crédito</option>
-</select>
+      {/* Método de pago - Solo para Venta Completa y Abono */}
+      {tipoVenta !== 'RESERVA' && (
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
+            Método de Pago
+          </label>
+          <select
+    value={medioPagoId}
+    onChange={(e) => setMedioPagoId(e.target.value)}
+    disabled={procesando}
+    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+  >
+    <option value="d397d917-c0d0-4c61-b2b3-2ebfab7deeb7">Efectivo</option>
+    <option value="af6e15fc-c52c-4491-abe1-20243af301c4">Nequi</option>
+    <option value="db94562d-bb01-42a3-9414-6e369a1a70ba">PSE</option>
+    <option value="57a2f560-b3d7-4fa8-91cf-24e6b2a6d7ff">Tarjeta Crédito</option>
+  </select>
+        </div>
+      )}
 
-      </div>
-
-      {/* Notas */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-700 mb-2">
-          Notas (opcional)
-        </label>
-        <textarea
-          value={notas}
-          onChange={(e) => setNotas(e.target.value)}
-          disabled={procesando}
-          rows={2}
-          className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-none"
-          placeholder={tipoVenta === 'ABONO' ? 'Detalles del abono y acuerdo de pago...' : 'Notas adicionales sobre la venta...'}
-        />
-      </div>
+      {/* Notas - Solo para Venta Completa y Abono */}
+      {tipoVenta !== 'RESERVA' && (
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
+            Notas (opcional)
+          </label>
+          <textarea
+            value={notas}
+            onChange={(e) => setNotas(e.target.value)}
+            disabled={procesando}
+            rows={2}
+            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent resize-none"
+            placeholder={tipoVenta === 'ABONO' ? 'Detalles del abono y acuerdo de pago...' : 'Notas adicionales sobre la venta...'}
+          />
+        </div>
+      )}
 
       {/* Resumen de totales */}
       <div className="border-t border-slate-200 pt-4 mb-6">
@@ -464,19 +549,44 @@ export default function CarritoVentas({
             Cancelar
           </button>
         )}
-        <button
-          onClick={procesarVenta}
-          disabled={procesando || boletas.length === 0 || !cliente.nombre || !cliente.telefono || (tipoVenta === 'ABONO' && montoAbono <= 0)}
-          className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {procesando 
-            ? 'Procesando...' 
-            : tipoVenta === 'ABONO' 
-              ? `Crear Abono ($${montoAbono.toFixed(2)})`
-              : `Completar Venta ($${total.toFixed(2)})`
-          }
-        </button>
+        
+        {tipoVenta === 'RESERVA' ? (
+          <button
+            onClick={() => setMostrarDialogoReserva(true)}
+            disabled={procesando || boletas.length === 0 || !cliente.nombre || !cliente.telefono}
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+          >
+            {procesando ? 'Procesando...' : `📌 Crear Reserva`}
+          </button>
+        ) : (
+          <button
+            onClick={procesarVenta}
+            disabled={procesando || boletas.length === 0 || !cliente.nombre || !cliente.telefono || (tipoVenta === 'ABONO' && montoAbono <= 0)}
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+          >
+            {procesando 
+              ? 'Procesando...' 
+              : tipoVenta === 'ABONO' 
+                ? `Crear Abono ($${montoAbono.toFixed(2)})`
+                : `Completar Venta ($${total.toFixed(2)})`
+            }
+          </button>
+        )}
       </div>
+
+      {/* Diálogo de reserva */}
+      <DialogoReserva
+        isOpen={mostrarDialogoReserva}
+        boletas={boletas}
+        cliente={cliente}
+        precioBoleta={precioBoleta}
+        rifaId={rifaId}
+        onClose={() => setMostrarDialogoReserva(false)}
+        onReservaCompletada={() => {
+          setMostrarDialogoReserva(false)
+          onVentaCompletada()
+        }}
+      />
     </div>
   )
 }

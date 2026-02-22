@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { boletaApi } from '@/lib/boletaApi'
+import BoletaTicket from '@/components/BoletaTicket'
 import type { BoletaDetail } from '@/types/boleta'
 
 export default function BoletaPrintPage() {
@@ -11,7 +12,6 @@ export default function BoletaPrintPage() {
   const [boleta, setBoleta] = useState<BoletaDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-
   useEffect(() => {
     const token = localStorage.getItem('token')
     
@@ -102,93 +102,17 @@ export default function BoletaPrintPage() {
         </button>
       </div>
 
-      {/* Printable Ticket */}
+      {/* Mismo componente BoletaTicket que la vista de detalle — diseño idéntico */}
       <div className="flex justify-center">
-        <div className="border-2 border-slate-800 rounded-lg overflow-hidden bg-white" style={{ width: '600px', height: '262px' }}>
-          
-          {/* Left Section - QR, Barcode, Number */}
-          <div className="w-1/3 p-3 flex flex-col justify-between bg-white border-r-2 border-slate-800">
-            {/* Top text */}
-            <div className="text-xs text-center space-y-1 text-slate-900">
-              <p>- Boleta sin jugar no juega</p>
-              <p>- 128 días de caducidad</p>
-              <p>- Juega hasta que quede en poder del público</p>
-            </div>
-            
-            {/* QR Code */}
-            <div className="flex justify-center">
-              <div className="bg-white p-1">
-                <img
-                  src={boleta.qr_url}
-                  alt="QR Code"
-                  className="w-20 h-20"
-                />
-              </div>
-            </div>
-            
-            {/* Barcode and Number */}
-            <div className="space-y-2">
-              <div className="bg-white">
-                <img
-                  src={`https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(boleta.barcode)}&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0`}
-                  alt="Barcode"
-                  className="w-full h-8"
-                />
-              </div>
-              <div className="text-center">
-                <div className="inline-block border-2 border-slate-800 px-2 py-1">
-                  <span className="text-sm font-bold text-slate-900">Num: {boleta.numero.toString().padStart(4, '0')}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right Section - Template Image */}
-          <div className="w-2/3 relative">
-            {boleta.imagen_url ? (
-              <img
-                src={boleta.imagen_url}
-                alt={`Boleta ${boleta.numero}`}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to gradient if image fails to load
-                  const target = e.target as HTMLImageElement
-                  target.style.display = 'none'
-                  target.nextElementSibling?.classList.remove('hidden')
-                }}
-              />
-            ) : null}
-            
-            {/* Fallback gradient when no image or image fails to load */}
-            <div className={`w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center ${boleta.imagen_url ? 'hidden' : ''}`}>
-              <div className="text-center">
-                <div className="text-lg font-bold text-slate-900 mb-1">{boleta.rifa_nombre}</div>
-                <div className="text-slate-800 text-sm">Boleta #{boleta.numero.toString().padStart(4, '0')}</div>
-                <div className="mt-1">
-                  <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                    boleta.estado === 'DISPONIBLE' ? 'bg-green-100 text-green-800' :
-                    boleta.estado === 'RESERVADA' ? 'bg-yellow-100 text-yellow-800' :
-                    boleta.estado === 'CON_PAGO' ? 'bg-blue-100 text-blue-800' :
-                    boleta.estado === 'TRANSFERIDA' ? 'bg-purple-100 text-purple-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
-                    {boleta.estado === 'DISPONIBLE' ? 'Disponible' :
-                     boleta.estado === 'RESERVADA' ? 'Reservada' :
-                     boleta.estado === 'CON_PAGO' ? 'Con Pago' :
-                     boleta.estado === 'TRANSFERIDA' ? 'Transferida' :
-                     boleta.estado}
-                  </span>
-                </div>
-                {boleta.cliente_info && (
-                  <div className="mt-2 text-xs text-slate-800">
-                    <p className="font-medium">{boleta.cliente_info.nombre}</p>
-                    <p className="text-xs">{boleta.cliente_info.identificacion}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <BoletaTicket
+          qrUrl={boleta.qr_url}
+          barcode={boleta.barcode}
+          numero={boleta.numero}
+          imagenUrl={boleta.imagen_url}
+          rifaNombre={boleta.rifa_nombre}
+          estado={boleta.estado}
+          clienteInfo={boleta.cliente_info}
+        />
       </div>
 
       {/* Additional Information - Hidden when printing */}
@@ -250,12 +174,10 @@ export default function BoletaPrintPage() {
             margin: 0 !important;
           }
           
-          /* Ensure ticket maintains exact dimensions when printing */
           .border-2 {
             border-width: 2pt !important;
           }
           
-          /* Fix image scaling for print */
           img {
             max-width: 100% !important;
             max-height: 100% !important;
@@ -263,7 +185,6 @@ export default function BoletaPrintPage() {
             page-break-inside: avoid;
           }
           
-          /* Ensure proper ticket layout */
           .w-2\\/3 {
             width: 66.666667% !important;
           }
@@ -272,22 +193,18 @@ export default function BoletaPrintPage() {
             width: 33.333333% !important;
           }
           
-          /* Prevent text from wrapping */
           .whitespace-nowrap {
             white-space: nowrap !important;
           }
           
-          /* Hide all non-print elements */
           .no-print {
             display: none !important;
           }
           
-          /* Ensure proper spacing */
           .space-y-2 > * + * {
             margin-top: 0.5rem !important;
           }
           
-          /* Fix barcode and QR code sizing */
           .w-28 {
             width: 7rem !important;
           }

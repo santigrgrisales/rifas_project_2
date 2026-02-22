@@ -119,21 +119,25 @@ export interface WebSocketEvent {
   timestamp: string
 }
 
-export interface BoletaBloqueadaEvent {
+export interface BoletaBloqueadaEventData {
   boleta_id: string
   numero: number
   bloqueado_por: string
   bloqueo_hasta: string
 }
 
-export interface BoletaDesbloqueadaEvent extends BoletaBloqueadaEvent {}
+export interface BoletaDesbloqueadaEventData extends BoletaBloqueadaEventData {}
 
-export interface BoletaVendidaEvent {
+export interface BoletaVendidaEventData {
   boleta_id: string
   numero: number
   vendida_a: string
   venta_id: string
 }
+
+// Alias para compatibilidad con código existente
+export type BoletaBloqueadaEvent = BoletaBloqueadaEventData
+export type BoletaVendidaEvent = BoletaVendidaEventData
 
 // Tipos para abonos y pagos parciales
 export interface Abono {
@@ -150,4 +154,59 @@ export interface VentaConAbonos extends VentaResponse {
   abonos: Abono[]
   proximo_vencimiento?: string
   dias_restantes?: number
+}
+// Tipos para Reservas
+export interface ReservaRequest {
+  rifa_id: string
+  cliente: Cliente
+  boletas: string[] // Array de IDs de boletas
+  dias_bloqueo?: number // Opcional, default 5
+  notas?: string
+}
+
+export interface BolataReservada {
+  id: string
+  numero: number
+}
+
+export interface ReservaResponse {
+  reserva_id: string
+  tipo: 'RESERVA_FORMAL'
+  rifa_titulo: string
+  cantidad_boletas: number
+  dias_bloqueo: number
+  bloqueo_hasta: string
+  estado_venta: 'PENDIENTE'
+  monto_total: number
+  boletas_reservadas: BolataReservada[]
+  cliente_id?: string
+  cliente_nombre?: string
+  created_at?: string
+}
+
+export interface ConvertirReservaRequest {
+  monto_total: number
+  total_pagado: number
+  medio_pago_id: string
+}
+
+export interface ConvertirReservaResponse {
+  venta_id: string
+  tipo: 'VENTA_CONVERTIDA'
+  cantidad_boletas: number
+  monto_total: number
+  total_pagado: number
+  saldo_pendiente: number
+  estado_venta: 'ABONADA' | 'COMPLETADA'
+}
+
+export interface CancelarReservaRequest {
+  motivo: string
+}
+
+export interface CancelarReservaResponse {
+  reserva_id: string
+  boletas_liberadas: number
+  estado_venta: 'CANCELADA'
+  motivo: string
 }

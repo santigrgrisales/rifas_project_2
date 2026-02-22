@@ -26,11 +26,11 @@ export default function BoletaPreview({
     <div className="bg-white rounded-lg shadow-lg border border-slate-200 p-6">
       <h3 className="text-lg font-medium text-slate-900 mb-4">Vista Previa de Boleta</h3>
       
-      {/* Ticket Layout - Exact design from image */}
-      <div className="flex border-2 border-slate-800 rounded-lg overflow-hidden bg-white" style={{ width: '800px', height: '350px' }}>
+      {/* Boleta: proporciones 720:2502 (izq:img), 3222×1417 — tamaño pantalla ~800×352 */}
+      <div className="flex border-2 border-slate-800 rounded-lg overflow-hidden bg-white" style={{ width: '800px', height: '352px' }}>
         
-        {/* Left Section - QR, Barcode, Number */}
-        <div className="w-1/3 p-4 flex flex-col justify-between bg-white border-r-2 border-slate-800">
+        {/* Left Section — proporción 720/3222 */}
+        <div className="flex-shrink-0 p-4 flex flex-col justify-between bg-white border-r-2 border-slate-800" style={{ width: '179px' }}>
           {/* Top text */}
           <div className="text-xs text-center space-y-1 text-slate-900">
             <p>- Boleta sin jugar no juega</p>
@@ -66,13 +66,13 @@ export default function BoletaPreview({
           </div>
         </div>
         
-        {/* Right Section - Template Image */}
-        <div className="w-2/3 relative">
+        {/* Right Section — proporción 2502/3222 */}
+        <div className="flex-shrink-0 relative h-full" style={{ width: '621px' }}>
           {imagenUrl && !imageError ? (
             <img
               src={imagenUrl}
               alt="Plantilla de Boleta"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center"
               onError={() => setImageError(true)}
             />
           ) : (

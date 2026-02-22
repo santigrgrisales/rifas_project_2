@@ -12,27 +12,32 @@ export default function GestionarAbonosPage() {
   const [clienteSeleccionado, setClienteSeleccionado] =
     useState<Cliente | null>(null)
 
-  const volverDashboard = () => {
-    router.push('/dashboard')
-  }
+  const volverVentas = () => router.push('/ventas')
+  const volverDashboard = () => router.push('/dashboard')
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
+      {/* Header alineado con /ventas y /ventas/nueva-venta */}
       <header className="bg-white shadow-sm border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={volverDashboard}
-                className="text-slate-600 hover:text-slate-900"
-              >
-                ← Dashboard
-              </button>
-              <h1 className="text-xl font-semibold text-slate-900">
-                Gestionar Abonos
-              </h1>
-            </div>
+          <div className="flex items-center h-16 space-x-4">
+            <button
+              type="button"
+              onClick={volverVentas}
+              className="text-slate-600 hover:text-slate-900"
+            >
+              ← Ventas
+            </button>
+            <button
+              type="button"
+              onClick={volverDashboard}
+              className="text-slate-500 hover:text-slate-700 text-sm"
+            >
+              Dashboard
+            </button>
+            <h1 className="text-xl font-semibold text-slate-900">
+              Gestionar Abonos
+            </h1>
           </div>
         </div>
       </header>

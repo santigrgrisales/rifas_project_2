@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import BoletaTicket from './BoletaTicket'
 import type { BoletaDetail } from '@/types/boleta'
 
 interface BoletaDetailProps {
@@ -9,8 +9,6 @@ interface BoletaDetailProps {
 }
 
 export default function BoletaDetail({ boleta, onPrint }: BoletaDetailProps) {
-  const [imageError, setImageError] = useState(false)
-  
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('es-CO', {
       day: '2-digit',
@@ -67,76 +65,15 @@ export default function BoletaDetail({ boleta, onPrint }: BoletaDetailProps) {
           </button>
         </div>
         
-        {/* Ticket Layout - Exact design from image */}
-        <div className="flex border-2 border-slate-800 rounded-lg overflow-hidden bg-white mx-auto" style={{ width: '800px', height: '350px' }}>
-          
-          {/* Left Section - QR, Barcode, Number */}
-          <div className="w-1/3 p-4 flex flex-col justify-between bg-white border-r-2 border-slate-800">
-            {/* Top text */}
-            <div className="text-xs text-center space-y-1 text-slate-900">
-              <p>- Boleta sin jugar no juega</p>
-              <p>- 128 días de caducidad</p>
-              <p>- Juega hasta que quede en poder del público</p>
-            </div>
-            
-            {/* QR Code */}
-            <div className="flex justify-center">
-              <div className="bg-white p-2 border border-slate-300">
-                <img
-                  src={boleta.qr_url}
-                  alt="QR Code"
-                  className="w-28 h-28"
-                />
-              </div>
-            </div>
-            
-            {/* Barcode and Number */}
-            <div className="space-y-2">
-              <div className="bg-white">
-                <img
-                  src={`https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(boleta.barcode)}&code=Code128&multiplebarcodes=false&translate-esc=false&unit=Fit&dpi=96&imagetype=Gif&rotation=0&color=%23000000&bgcolor=%23ffffff&qunit=Mm&quiet=0`}
-                  alt="Barcode"
-                  className="w-full h-12"
-                />
-              </div>
-              <div className="text-center">
-                <div className="inline-block border-2 border-slate-800 px-3 py-1">
-                  <span className="text-lg font-bold text-slate-900">Num: {boleta.numero.toString().padStart(4, '0')}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right Section - Template Image */}
-          <div className="w-2/3 relative">
-            {boleta.imagen_url ? (
-              <img
-                src={boleta.imagen_url}
-                alt={`Boleta ${boleta.numero}`}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback to gradient if image fails to load
-                  const target = e.target as HTMLImageElement
-                  target.style.display = 'none'
-                  target.nextElementSibling?.classList.remove('hidden')
-                }}
-              />
-            ) : null}
-            
-            {/* Fallback gradient when no image or image fails to load */}
-            <div className={`w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center ${boleta.imagen_url ? 'hidden' : ''}`}>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-slate-900 mb-2">{boleta.rifa_nombre}</div>
-                <div className="text-slate-800">Boleta #{boleta.numero.toString().padStart(4, '0')}</div>
-                <div className="mt-2">
-                  <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getEstadoColor(boleta.estado)}`}>
-                    {getEstadoLabel(boleta.estado)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <BoletaTicket
+          qrUrl={boleta.qr_url}
+          barcode={boleta.barcode}
+          numero={boleta.numero}
+          imagenUrl={(boleta as { imagen_url?: string | null }).imagen_url ?? (boleta as { imagenUrl?: string | null }).imagenUrl}
+          rifaNombre={boleta.rifa_nombre}
+          estado={boleta.estado}
+          clienteInfo={boleta.cliente_info}
+        />
       </div>
 
       {/* Detailed Information */}

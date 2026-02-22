@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { rifaApi } from '@/lib/rifaApi'
 import { boletaApi } from '@/lib/boletaApi'
+import { uploadApi } from '@/lib/uploadApi'
+import { getStorageImageUrl } from '@/lib/storageImageUrl'
 import { Rifa } from '@/types/rifa'
 import { BoletaGenerateRequest } from '@/types/boleta'
 import BoletaPreview from '@/components/BoletaPreview'
@@ -17,13 +19,19 @@ export default function CrearBoletasPage() {
   const [success, setSuccess] = useState<string | null>(null)
   const [userRole, setUserRole] = useState<string | null>(null)
   const [showPreview, setShowPreview] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [cachedImageFile, setCachedImageFile] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   
   // Form fields for the new parameters
   const [formData, setFormData] = useState<BoletaGenerateRequest>({
     qr_base_url: 'https://rifas.com/boletas',
-    imagen_url: 'https://rifas.com/images/boleta-template-2024.jpg',
+    imagen_url: '',
     diseño_template: 'modern' // Keep default but remove from UI
   })
+
+  const hasImage = Boolean(cachedImageFile || formData.imagen_url)
   
   const router = useRouter()
 
@@ -71,7 +79,7 @@ export default function CrearBoletasPage() {
       return
     }
 
-    if (!formData.qr_base_url || !formData.imagen_url || !formData.diseño_template) {
+    if (!formData.qr_base_url || !hasImage || !formData.diseño_template) {
       setError('Por favor completa todos los campos de configuración')
       return
     }
@@ -81,7 +89,20 @@ export default function CrearBoletasPage() {
       setError(null)
       setSuccess(null)
 
-      const response = await boletaApi.generarBoletas(selectedRifa, formData)
+      let imagenUrl = formData.imagen_url
+
+      // Si hay imagen en caché (aún no subida), subirla ahora solo antes de generar
+      if (cachedImageFile) {
+        setUploadingImage(true)
+        const uploadResponse = await uploadApi.uploadImagen(cachedImageFile)
+        imagenUrl = uploadResponse.url
+        setUploadingImage(false)
+      }
+
+      const response = await boletaApi.generarBoletas(selectedRifa, {
+        ...formData,
+        imagen_url: imagenUrl,
+      })
       
       setSuccess(`Se han generado ${response.data.boletas_generadas} boletas exitosamente con la configuración proporcionada`)
       
@@ -94,6 +115,7 @@ export default function CrearBoletasPage() {
       setError(err instanceof Error ? err.message : 'Error al generar boletas')
     } finally {
       setCreating(false)
+      setUploadingImage(false)
     }
   }
 
@@ -104,9 +126,58 @@ export default function CrearBoletasPage() {
     }))
   }
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Validar tipo de archivo
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+    if (!allowedTypes.includes(file.type)) {
+      setError('Tipo de archivo no válido. Solo se permiten JPG, PNG o WEBP')
+      return
+    }
+
+    // Validar tamaño (5MB máximo)
+    if (file.size > 5 * 1024 * 1024) {
+      setError('El archivo es demasiado grande. Máximo 5MB')
+      return
+    }
+
+    setError(null)
+
+    // Revocar URL anterior si existía (para evitar fugas de memoria)
+    if (imagePreview && imagePreview.startsWith('blob:')) {
+      URL.revokeObjectURL(imagePreview)
+    }
+
+    // Cachear en frontend: guardar el archivo y crear URL local para vista previa
+    // La imagen solo se subirá a storage cuando se generen las boletas correctamente
+    setCachedImageFile(file)
+    setImagePreview(URL.createObjectURL(file))
+  }
+
+  const handleRemoveImage = () => {
+    if (imagePreview && imagePreview.startsWith('blob:')) {
+      URL.revokeObjectURL(imagePreview)
+    }
+    setCachedImageFile(null)
+    setImagePreview(null)
+    setFormData(prev => ({
+      ...prev,
+      imagen_url: ''
+    }))
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
   const handlePreview = () => {
     if (!selectedRifa) {
       setError('Por favor selecciona una rifa para previsualizar')
+      return
+    }
+    if (!hasImage) {
+      setError('Por favor carga una imagen de plantilla antes de previsualizar')
       return
     }
     setShowPreview(true)
@@ -221,21 +292,75 @@ export default function CrearBoletasPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="imagen_url" className="block text-sm font-medium text-slate-700 mb-2">
-                    URL de Imagen de Plantilla *
+                  <label htmlFor="imagen_file" className="block text-sm font-medium text-slate-700 mb-2">
+                    Imagen de Plantilla *
                   </label>
-                  <input
-                    type="url"
-                    id="imagen_url"
-                    value={formData.imagen_url}
-                    onChange={(e) => handleInputChange('imagen_url', e.target.value)}
-                    placeholder="https://rifas.com/images/boleta-template-2024.jpg"
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none text-slate-900 bg-white"
-                    disabled={creating}
-                  />
-                  <p className="mt-1 text-xs text-slate-500">
-                    URL de la imagen que se usará como fondo para las boletas
-                  </p>
+                  
+                  {!hasImage ? (
+                    <div className="space-y-2">
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        id="imagen_file"
+                        accept="image/jpeg,image/jpg,image/png,image/webp"
+                        onChange={handleImageUpload}
+                        className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent outline-none text-slate-900 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                        disabled={creating || uploadingImage}
+                      />
+                      <p className="text-xs text-slate-500">
+                        Formatos permitidos: JPG, PNG, WEBP. Tamaño máximo: 5MB
+                      </p>
+                      <p className="text-xs text-slate-500">
+                        La imagen se guardará en el servidor solo al generar las boletas correctamente
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <div className="relative border border-slate-300 rounded-lg p-4 bg-slate-50">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-medium text-slate-700">Imagen cargada:</span>
+                          <button
+                            type="button"
+                            onClick={handleRemoveImage}
+                            className="text-red-600 hover:text-red-700 text-sm font-medium"
+                            disabled={creating || uploadingImage}
+                          >
+                            Eliminar
+                          </button>
+                        </div>
+                        {(imagePreview || formData.imagen_url) && (
+                          <div className="mt-2">
+                            <img
+                              src={imagePreview || (typeof formData.imagen_url === 'string' ? (getStorageImageUrl(formData.imagen_url) ?? formData.imagen_url) : formData.imagen_url)}
+                              alt="Preview"
+                              className="max-w-full max-h-48 rounded border border-slate-200"
+                            />
+                          </div>
+                        )}
+                        <p className="mt-2 text-xs text-slate-500">
+                          {cachedImageFile
+                            ? `Imagen en caché (${cachedImageFile.name}). Se guardará al generar boletas.`
+                            : formData.imagen_url}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                        disabled={creating || uploadingImage}
+                      >
+                        Cambiar imagen
+                      </button>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png,image/webp"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                        disabled={creating || uploadingImage}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -260,7 +385,7 @@ export default function CrearBoletasPage() {
                 type="button"
                 onClick={handlePreview}
                 className="px-6 py-2 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition-colors"
-                disabled={creating || !selectedRifa}
+                disabled={creating || uploadingImage || !selectedRifa || !hasImage}
               >
                 Vista Previa
               </button>
@@ -277,7 +402,7 @@ export default function CrearBoletasPage() {
                 <button
                   type="submit"
                   className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={creating || !selectedRifa || !formData.qr_base_url || !formData.imagen_url || !formData.diseño_template}
+                  disabled={creating || uploadingImage || !selectedRifa || !formData.qr_base_url || !hasImage || !formData.diseño_template}
                 >
                   {creating ? 'Generando...' : 'Generar Boletas'}
                 </button>
@@ -318,7 +443,7 @@ export default function CrearBoletasPage() {
               <div className="p-4">
                 <BoletaPreview
                   qrBaseUrl={formData.qr_base_url}
-                  imagenUrl={formData.imagen_url}
+                  imagenUrl={imagePreview || (formData.imagen_url ? (getStorageImageUrl(formData.imagen_url) ?? formData.imagen_url) : '')}
                   diseñoTemplate={formData.diseño_template}
                   rifaId={selectedRifa}
                   boletaNumero={1}

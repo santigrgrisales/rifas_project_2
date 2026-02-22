@@ -26,6 +26,33 @@ const createVentaSchema = Joi.object({
   notas: Joi.string().optional().max(500)
 });
 
+const crearReservaSchema = Joi.object({
+  rifa_id: Joi.string().uuid().required(),
+  cliente: Joi.object({
+    nombre: Joi.string().required().max(200),
+    telefono: Joi.string().required().max(20),
+    email: Joi.string().email().optional().max(100),
+    direccion: Joi.string().optional().max(300),
+    identificacion: Joi.string().optional().max(20)
+  }).required(),
+  boletas: Joi.array()
+    .items(Joi.string().uuid())
+    .min(1)
+    .required(),
+  dias_bloqueo: Joi.number().integer().positive().default(3).max(30),
+  notas: Joi.string().optional().max(500)
+});
+
+const convertirReservaSchema = Joi.object({
+  monto_total: Joi.number().positive().required(),
+  total_pagado: Joi.number().positive().required(),
+  medio_pago_id: Joi.string().uuid().required()
+});
+
+const cancelarReservaSchema = Joi.object({
+  motivo: Joi.string().optional().max(500)
+});
+
 const updateVentaSchema = Joi.object({
   cliente_nombre: Joi.string().max(200),
   cliente_telefono: Joi.string().max(20),
@@ -42,6 +69,10 @@ const idSchema = Joi.object({
   id: Joi.number().integer().positive().required()
 });
 
+const uuidIdSchema = Joi.object({
+  id: Joi.string().uuid().required()
+});
+
 const rifaIdSchema = Joi.object({
   rifa_id: Joi.number().integer().positive().required()
 });
@@ -56,6 +87,37 @@ router.post('/',
   authorize(['SUPER_ADMIN', 'admin', 'vendedor']), 
   validate(createVentaSchema), 
   ventaController.createVenta
+);
+
+// 🔹 CREAR RESERVA FORMAL (Bloqueo largo, vinculado a cliente)
+// IMPORTANTE: Esta ruta debe estar ANTES de la ruta genérica POST /:id
+router.post(
+  '/reservar',
+  authenticateToken,
+  authorize(['SUPER_ADMIN', 'admin', 'vendedor']),
+  validate(crearReservaSchema),
+  ventaController.crearReserva
+);
+
+// 🔹 CONVERTIR RESERVA EN VENTA
+// IMPORTANTE: Antes de rutas genéricas con /:id
+router.post(
+  '/:id/convertir-reserva',
+  authenticateToken,
+  authorize(['SUPER_ADMIN', 'admin', 'vendedor']),
+  validateParams(uuidIdSchema),
+  validate(convertirReservaSchema),
+  ventaController.convertirReserva
+);
+
+// 🔹 CANCELAR RESERVA
+router.post(
+  '/:id/cancelar-reserva',
+  authenticateToken,
+  authorize(['SUPER_ADMIN', 'admin', 'vendedor']),
+  validateParams(uuidIdSchema),
+  validate(cancelarReservaSchema),
+  ventaController.cancelarReserva
 );
 
 
@@ -127,6 +189,24 @@ router.post('/:id/cancel',
   ventaController.cancelVenta
 );
 
+
+// Schema de validación para registrar abono
+const registrarAbonoSchema = Joi.object({
+  monto: Joi.number().positive().required(),
+  metodo_pago: Joi.string().optional(),
+  notas: Joi.string().optional().max(500)
+});
+
+// IMPORTANTE: Esta ruta debe estar ANTES de la ruta genérica `/:id` (importante el orden)
+router.post(
+  '/:id/abonos',
+  authenticateToken,
+  authorize(['SUPER_ADMIN', 'admin', 'vendedor']),
+  validateParams(uuidIdSchema),  // ✅ Usar uuidIdSchema en lugar de idSchema
+  validate(registrarAbonoSchema),
+  ventaController.registrarAbono
+);
+
 router.delete('/:id', 
   authenticateToken, 
   authorize(['SUPER_ADMIN', 'admin']), 
@@ -146,6 +226,8 @@ router.get(
   authenticateToken,
   ventaController.getVentaDetalleFinanciero
 );
+
+
 
 
 

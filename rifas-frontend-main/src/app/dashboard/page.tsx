@@ -117,6 +117,29 @@ export default function DashboardPage() {
                   </div>
                 </a>
               )}
+
+              {/* Módulo de Ventas Públicas - Disponible para SUPER_ADMIN y VENDEDOR */}
+              {(user.rol === 'SUPER_ADMIN' || user.rol === 'VENDEDOR') && (
+                <a
+                  href="/ventas-publicas"
+                  className="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-lg border border-green-200 hover:shadow-md transition-shadow cursor-pointer group"
+                >
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white group-hover:bg-green-700 transition-colors">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-medium text-green-900 mb-2 ml-3">Ventas Públicas</h4>
+                  </div>
+                  <p className="text-sm text-green-700">Confirmar pagos desde la web pública</p>
+                  <div className="mt-3 flex items-center text-xs text-green-600">
+                    <span className="inline-flex items-center px-2 py-1 rounded-full bg-green-100 text-green-800">
+                      Nuevo
+                    </span>
+                  </div>
+                </a>
+              )}
               
               <a
                 href="/clientes"

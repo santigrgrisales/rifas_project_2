@@ -5,7 +5,7 @@ const config = require('./config/env');
 const logger = require('./utils/logger');
 const { errorHandler } = require('./middlewares/error');
 const { generalLimiter } = require('./middlewares/rateLimiter');
-
+const { startBoletaExpirationJob } = require('./jobs/boletaExpirationJob');
 
 const reportesRoutes = require('./modules/reportes/reportes.routes');
 const authRoutes = require('./modules/auth/auth.routes');
@@ -15,6 +15,9 @@ const boletasRoutes = require('./modules/boletas/boletas.routes');
 const ventasRoutes = require('./modules/ventas/ventas.routes');
 const pagosRoutes = require('./modules/pagos/pagos.routes');
 const abonosRoutes = require('./modules/abonos/abonos.routes');
+const uploadsRoutes = require('./modules/uploads/uploads.routes');
+const publicRoutes = require('./modules/public/public.routes');
+const publicDashboardRoutes = require('./modules/public-dashboard/public-dashboard.routes');
 
 const app = express();
 
@@ -51,7 +54,9 @@ app.get('/api', (req, res) => {
       boletas: '/api/boletas',
       ventas: '/api/ventas',
       pagos: '/api/pagos',
-      abonos: '/api/abonos'
+      abonos: '/api/abonos',
+      public: '/api/public (web pública)',
+      admin_dashboard: '/api/admin/dashboard (gestión ventas públicas)'
     }
   });
 });
@@ -64,7 +69,13 @@ app.use('/api/ventas', ventasRoutes);
 app.use('/api/pagos', pagosRoutes);
 app.use('/api/abonos', abonosRoutes);
 app.use('/api/reportes', reportesRoutes);
+app.use('/api/uploads', uploadsRoutes);
+app.use('/api/public', publicRoutes);
+app.use('/api/admin/dashboard', publicDashboardRoutes);
+app.use('/storage', require('express').static('storage'));
 
+// 🔹 Iniciar job de liberación de boletas expiradas (cada 5 minutos)
+startBoletaExpirationJob(5 * 60 * 1000);
 
 app.use('*', (req, res) => {
   res.status(404).json({
