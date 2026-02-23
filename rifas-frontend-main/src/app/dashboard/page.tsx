@@ -159,7 +159,7 @@ export default function DashboardPage() {
               )}
               {user.rol === 'SUPER_ADMIN' && (
                 <a
-                  href="/boletas"
+                  href="/boletas/ver"
                   className="bg-white p-6 rounded-lg border border-slate-200 hover:shadow-md transition-shadow cursor-pointer"
                 >
                   <h4 className="text-lg font-medium text-slate-900 mb-2">Boletas</h4>

@@ -12985,3 +12985,19 @@
 {"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-23T03:02:15.470Z"}
 {"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-23T03:02:15.472Z"}
 {"level":"info","message":"Received SIGINT. Starting graceful shutdown...","service":"rifas-backend","timestamp":"2026-02-23T03:02:43.481Z"}
+{"level":"info","message":"[JOBS] Starting boletaExpirationJob (runs every 300s)","service":"rifas-backend","timestamp":"2026-02-23T03:02:50.681Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-23T03:02:50.866Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-23T03:02:50.875Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-23T03:02:50.877Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-23T03:02:51.002Z"}
+{"level":"info","message":"Database connection established successfully","service":"rifas-backend","timestamp":"2026-02-23T03:02:51.004Z"}
+{"level":"info","message":"Server running on port 3000 in development mode","service":"rifas-backend","timestamp":"2026-02-23T03:02:51.009Z"}
+{"level":"info","message":"Health check available at http://localhost:3000/health","service":"rifas-backend","timestamp":"2026-02-23T03:02:51.009Z"}
+{"level":"info","message":"API documentation at http://localhost:3000/api","service":"rifas-backend","timestamp":"2026-02-23T03:02:51.009Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-23T03:03:10.590Z"}
+{"level":"info","message":"GET /api/boletas/rifa/f1056ae8-3132-4a2a-b67c-3230df0df494/full-status - ::1","service":"rifas-backend","timestamp":"2026-02-23T03:03:14.583Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-23T03:03:14.601Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-23T03:03:14.603Z"}
+{"level":"info","message":"GET /api/boletas/rifa/be8f2051-2b22-4bfe-9ab6-24ee81fa38be/full-status - ::1","service":"rifas-backend","timestamp":"2026-02-23T03:03:19.440Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-23T03:03:19.449Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-23T03:03:19.454Z"}
