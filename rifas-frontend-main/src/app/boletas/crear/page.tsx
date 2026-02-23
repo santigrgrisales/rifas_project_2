@@ -215,7 +215,7 @@ export default function CrearBoletasPage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => router.push('/boletas')}
+                onClick={() => router.push('/boletas/ver')}
                 className="text-slate-600 hover:text-slate-900 transition-colors"
               >
                 ← Boletas

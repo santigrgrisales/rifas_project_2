@@ -121,7 +121,8 @@ const SQL_QUERIES = {
             'id', b.cliente_id,
             'nombre', c.nombre,
             'telefono', c.telefono,
-            'email', c.email
+            'email', c.email,
+            'identificacion', c.identificacion
           )
         ELSE NULL 
       END as cliente_info,
