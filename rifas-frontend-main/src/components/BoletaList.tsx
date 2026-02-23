@@ -39,7 +39,7 @@ export default function BoletaList({ boletas, loading }: BoletaListProps) {
         const estadoRaw = boleta.estado?.toString().trim().toUpperCase() || ''
         if (estadoRaw === 'DISPONIBLE') acc.disponibles++
         else if (estadoRaw === 'PAGADA' || estadoRaw === 'CON_PAGO') acc.vendidas++
-        else if (estadoRaw === 'RESERVADA') acc.reservadas++
+        else if (estadoRaw === 'RESERVADA' && boleta.cliente_info) acc.reservadas++
         else if (estadoRaw === 'ABONADA') acc.abonadas++
         return acc
       },

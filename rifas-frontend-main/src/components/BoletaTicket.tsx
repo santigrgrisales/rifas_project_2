@@ -125,7 +125,7 @@ export default function BoletaTicket(props: BoletaTicketProps) {
         <div className={baseText}>
           {badge('BLOQUEADA', 'bg-amber-200 text-black')}
           <p className="font-semibold">Boleta bloqueada momentáneamente</p>
-          {reservadaHastaFmt && <p className="font-bold">Bloqueada hasta: {reservadaHastaFmt}</p>}
+          
         </div>
       )
     }
