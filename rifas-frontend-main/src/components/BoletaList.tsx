@@ -203,6 +203,9 @@ export default function BoletaList({ boletas, loading }: BoletaListProps) {
                 paginatedBoletas.map((boleta) => {
                   const estado = getEstadoInfo(boleta)
                   return (
+
+                    console.log("CLIENTE INFO:", boleta.cliente_info),
+
                     <tr key={boleta.id} className="hover:bg-slate-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-lg font-mono font-bold text-slate-900">{formatBoletaNumber(boleta.numero)}</div>
@@ -255,6 +258,7 @@ export default function BoletaList({ boletas, loading }: BoletaListProps) {
                       </td>
                     </tr>
                   )
+
                 })
               )}
             </tbody>
