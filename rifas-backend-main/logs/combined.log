@@ -11616,3 +11616,319 @@
 {"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:09:42.099Z"}
 {"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:09:42.100Z"}
 {"level":"info","message":"Received SIGINT. Starting graceful shutdown...","service":"rifas-backend","timestamp":"2026-02-22T21:09:42.364Z"}
+{"level":"info","message":"[JOBS] Starting boletaExpirationJob (runs every 300s)","service":"rifas-backend","timestamp":"2026-02-22T21:09:50.797Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.030Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.043Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.044Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.105Z"}
+{"level":"info","message":"Database connection established successfully","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.109Z"}
+{"level":"info","message":"Server running on port 3000 in development mode","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.113Z"}
+{"level":"info","message":"Health check available at http://localhost:3000/health","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.113Z"}
+{"level":"info","message":"API documentation at http://localhost:3000/api","service":"rifas-backend","timestamp":"2026-02-22T21:09:51.113Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:09:58.575Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:09:59.807Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:02.248Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:03.377Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:04.735Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:18.738Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:20.151Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:20.965Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:24.269Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:57.563Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:10:57.790Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:10:58.317Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:02.862Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:06.412Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:17.971Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:23.674Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:24.996Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:26.148Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:26.773Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:32.500Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:32.535Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:38.278Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:11:38.327Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:11:38.335Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:38.429Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:11:38.435Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:11:38.437Z"}
+{"level":"info","message":"POST /api/boletas/2c3d4eb0-5e1a-4ac2-828a-581651bd8048/block - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:39.459Z"}
+{"level":"info","message":"Boleta 2c3d4eb0-5e1a-4ac2-828a-581651bd8048 blocked until Sun Feb 22 2026 16:26:39 GMT-0500 (hora estándar de Colombia)","service":"rifas-backend","timestamp":"2026-02-22T21:11:39.506Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:45.146Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:46.960Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:11:52.745Z"}
+{"level":"info","message":"GET /api/clientes/cedula/1002744245 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:07.612Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:09.666Z"}
+{"level":"info","message":"GET /api/clientes/cedula/1002744245 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:11.048Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:16.394Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:18.330Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:19.192Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:19.785Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:20.604Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:21.452Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:22.007Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:26.254Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:27.468Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:12:51.584Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:00.087Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:02.516Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:03.445Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:06.661Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:16.209Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:18.867Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:20.630Z"}
+{"level":"info","message":"GET /api/clientes/cedula/1002744245 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:13:23.221Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:14:01.522Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:14:01.803Z"}
+{"level":"error","message":"Error in createCliente controller: Phone number already exists","service":"rifas-backend","stack":"Error: Phone number already exists\n    at ClienteService.createCliente (C:\\Users\\santi\\Downloads\\rifas_project\\rifas-backend-main\\src\\modules\\clientes\\clientes.service.js:27:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async createCliente (C:\\Users\\santi\\Downloads\\rifas_project\\rifas-backend-main\\src\\modules\\clientes\\clientes.controller.js:8:23)","timestamp":"2026-02-22T21:14:01.859Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:14:06.386Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:14:06.595Z"}
+{"level":"info","message":"Cliente created: 02fdae62-583c-40a2-b57c-2a4152ff9d73","service":"rifas-backend","timestamp":"2026-02-22T21:14:06.637Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:14:20.406Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:14:51.223Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:14:51.243Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:14:51.247Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:19:51.142Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:19:51.214Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:19:51.224Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:21.419Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:20:21.668Z"}
+{"level":"error","message":"Error in createCliente controller: Phone number already exists","service":"rifas-backend","stack":"Error: Phone number already exists\n    at ClienteService.createCliente (C:\\Users\\santi\\Downloads\\rifas_project\\rifas-backend-main\\src\\modules\\clientes\\clientes.service.js:27:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async createCliente (C:\\Users\\santi\\Downloads\\rifas_project\\rifas-backend-main\\src\\modules\\clientes\\clientes.controller.js:8:23)","timestamp":"2026-02-22T21:20:21.727Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:26.880Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:20:27.148Z"}
+{"level":"info","message":"Cliente created: a12c3afe-7a3e-4598-b000-69fe2e3ee5e8","service":"rifas-backend","timestamp":"2026-02-22T21:20:27.188Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:44.553Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:44.563Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:54.273Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:20:54.314Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:20:54.329Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:54.440Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:20:54.445Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:20:54.448Z"}
+{"level":"info","message":"POST /api/boletas/ca683761-92ca-4cc4-8ef1-5da4eeee881a/block - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:20:55.419Z"}
+{"level":"info","message":"Boleta ca683761-92ca-4cc4-8ef1-5da4eeee881a blocked until Sun Feb 22 2026 16:35:55 GMT-0500 (hora estándar de Colombia)","service":"rifas-backend","timestamp":"2026-02-22T21:20:55.483Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:21:24.615Z"}
+{"level":"info","message":"Cliente created: df415820-4ce5-48b4-a1d3-f731a7bcd877","service":"rifas-backend","timestamp":"2026-02-22T21:21:24.632Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:24:51.070Z"}
+{"level":"info","message":"[AUTO] 1 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:24:51.141Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:24:51.144Z"}
+{"bloqueos_liberados":1,"level":"info","message":"[JOB RESULT] Boleta expiration check:","reservas_liberadas":0,"service":"rifas-backend","timestamp":"2026-02-22T21:24:51.147Z","total":1}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:29:51.090Z"}
+{"level":"info","message":"[AUTO] 1 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:29:51.163Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:29:51.168Z"}
+{"bloqueos_liberados":1,"level":"info","message":"[JOB RESULT] Boleta expiration check:","reservas_liberadas":0,"service":"rifas-backend","timestamp":"2026-02-22T21:29:51.176Z","total":1}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:30:57.021Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:30:57.585Z"}
+{"level":"info","message":"Cliente created: a0c0736c-c2f4-4b20-8df8-39851e9b1073","service":"rifas-backend","timestamp":"2026-02-22T21:30:57.631Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:34:51.033Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:34:51.102Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:34:51.104Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:36:28.972Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:36:29.031Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:36:29.403Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:36:31.677Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:36:31.682Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:39:51.163Z"}
+{"level":"info","message":"[AUTO] 1 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:39:51.203Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:39:51.206Z"}
+{"bloqueos_liberados":1,"level":"info","message":"[JOB RESULT] Boleta expiration check:","reservas_liberadas":0,"service":"rifas-backend","timestamp":"2026-02-22T21:39:51.215Z","total":1}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:40:39.605Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:40:39.878Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:40:39.889Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:40:39.893Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:40:40.032Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:40:40.039Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:40:40.042Z"}
+{"level":"info","message":"POST /api/boletas/4243e18b-f09e-4baa-b6bf-11062f34fb81/block - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:40:40.644Z"}
+{"level":"info","message":"Boleta 4243e18b-f09e-4baa-b6bf-11062f34fb81 blocked until Sun Feb 22 2026 16:55:40 GMT-0500 (hora estándar de Colombia)","service":"rifas-backend","timestamp":"2026-02-22T21:40:40.666Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:04.916Z"}
+{"level":"info","message":"Cliente created: 711d21a0-7c8f-4d4a-8acf-a92531d58161","service":"rifas-backend","timestamp":"2026-02-22T21:41:04.998Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:55.766Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:55.798Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:55.820Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:41:56.001Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:56.019Z"}
+{"level":"info","message":"GET /api/boletas/rifa/c2fbdcf0-e7ed-4939-b42e-0d2702f029d2 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:56.876Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:41:56.903Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:41:56.910Z"}
+{"level":"info","message":"GET /api/boletas/rifa/c2fbdcf0-e7ed-4939-b42e-0d2702f029d2 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:56.994Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:41:57.000Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:41:57.004Z"}
+{"level":"info","message":"POST /api/boletas/881f5433-a47c-4a12-a1fc-7b9c6b4b771e/block - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:41:58.194Z"}
+{"level":"info","message":"Boleta 881f5433-a47c-4a12-a1fc-7b9c6b4b771e blocked until Sun Feb 22 2026 16:56:58 GMT-0500 (hora estándar de Colombia)","service":"rifas-backend","timestamp":"2026-02-22T21:41:58.227Z"}
+{"level":"info","message":"POST /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:42:37.315Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:42:37.530Z"}
+{"level":"info","message":"Cliente created: ab8d721b-59ce-4bbc-9da4-670a356ec6b8","service":"rifas-backend","timestamp":"2026-02-22T21:42:37.555Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:42:49.663Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:42:49.682Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:42:52.242Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:42:52.273Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:42:52.276Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:42:52.364Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:42:52.369Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:42:52.375Z"}
+{"level":"info","message":"POST /api/boletas/6be1928c-f201-424b-b502-00fe35cd6b98/block - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:42:53.360Z"}
+{"level":"info","message":"Boleta 6be1928c-f201-424b-b502-00fe35cd6b98 blocked until Sun Feb 22 2026 16:57:53 GMT-0500 (hora estándar de Colombia)","service":"rifas-backend","timestamp":"2026-02-22T21:42:53.378Z"}
+{"level":"info","message":"GET /api/clientes - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:43:01.249Z"}
+{"level":"info","message":"POST /api/ventas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:43:08.550Z"}
+{"level":"info","message":"GET /api/ventas/02c3506f-c6c5-43c9-abaa-117b469e771c/detalle-financiero - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:43:42.223Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:43:42.635Z"}
+{"level":"info","message":"GET /api/boletas/6be1928c-f201-424b-b502-00fe35cd6b98 - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:43:49.558Z"}
+{"level":"info","message":"GET /storage/rifa-1771719331619.png - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:43:49.717Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:44:51.137Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:44:51.200Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:44:51.205Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:44:54.605Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:44:54.613Z"}
+{"level":"info","message":"GET /rifa/ - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:44:54.625Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T21:44:54.665Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:49:51.320Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:49:51.378Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:49:51.380Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:54:51.133Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:54:51.184Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:54:51.187Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T21:59:51.145Z"}
+{"level":"info","message":"[AUTO] 2 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T21:59:51.238Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T21:59:51.269Z"}
+{"bloqueos_liberados":2,"level":"info","message":"[JOB RESULT] Boleta expiration check:","reservas_liberadas":0,"service":"rifas-backend","timestamp":"2026-02-22T21:59:51.276Z","total":2}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:04:51.096Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:04:51.137Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:04:51.141Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:09:51.118Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:09:51.165Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:09:51.168Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:14:51.211Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:14:51.284Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:14:51.287Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:19:51.170Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:19:51.221Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:19:51.287Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:24:51.114Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:24:51.160Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:24:51.162Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:29:51.136Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:29:51.203Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:29:51.210Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:34:51.244Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:34:51.310Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:34:51.315Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:39:51.137Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:39:51.208Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:39:51.211Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:44:51.212Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:44:51.273Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:44:51.278Z"}
+{"level":"info","message":"POST /api/auth/login - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:47:47.239Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:47:47.496Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:49:51.137Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:49:51.210Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:49:51.214Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:28.097Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:51:28.734Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:28.941Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.003Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.005Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.138Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.146Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.152Z"}
+{"level":"info","message":"GET /api/boletas/rifa/c2fbdcf0-e7ed-4939-b42e-0d2702f029d2 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.185Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.510Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.522Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.525Z"}
+{"level":"info","message":"GET /api/boletas/rifa/c2fbdcf0-e7ed-4939-b42e-0d2702f029d2 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.674Z"}
+{"level":"info","message":"GET /api/boletas/rifa/94d3a1c0-4b22-48f8-a3ad-46863662b716 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.698Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.730Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.755Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.759Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:29.775Z"}
+{"level":"info","message":"GET /api/boletas/rifa/94d3a1c0-4b22-48f8-a3ad-46863662b716 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.188Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.192Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.204Z"}
+{"level":"info","message":"GET /api/boletas/rifa/37e7b972-cf27-4db7-9516-1ad8cc1f1ad7 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.246Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.251Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.256Z"}
+{"level":"info","message":"GET /api/boletas/rifa/9fe62292-aa73-49a1-b0be-b04f34d399f9 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.375Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.386Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:30.391Z"}
+{"level":"info","message":"GET /api/boletas/rifa/37e7b972-cf27-4db7-9516-1ad8cc1f1ad7 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.630Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.654Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.710Z"}
+{"level":"info","message":"GET /api/boletas/rifa/05fb2a73-df2b-4923-af3c-97426a00e47c - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.848Z"}
+{"level":"info","message":"GET /api/boletas/rifa/9fe62292-aa73-49a1-b0be-b04f34d399f9 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.858Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.865Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.870Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.872Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:31.875Z"}
+{"level":"info","message":"GET /api/boletas/rifa/05fb2a73-df2b-4923-af3c-97426a00e47c - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:33.148Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:33.154Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:33.157Z"}
+{"level":"info","message":"POST /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.180Z"}
+{"level":"info","message":"Rifa created: be8f2051-2b22-4bfe-9ab6-24ee81fa38be","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.265Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.273Z"}
+{"level":"info","message":"GET /api/boletas/rifa/be8f2051-2b22-4bfe-9ab6-24ee81fa38be - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.313Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.319Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.322Z"}
+{"level":"info","message":"GET /api/boletas/rifa/be8f2051-2b22-4bfe-9ab6-24ee81fa38be - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.330Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.341Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.343Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.349Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.357Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.359Z"}
+{"level":"info","message":"GET /api/boletas/rifa/afc36b0a-223c-4021-bb72-73b326d8abb6 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.408Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.413Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.415Z"}
+{"level":"info","message":"GET /api/boletas/rifa/c2fbdcf0-e7ed-4939-b42e-0d2702f029d2 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.423Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.426Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.498Z"}
+{"level":"info","message":"GET /api/boletas/rifa/c2fbdcf0-e7ed-4939-b42e-0d2702f029d2 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.571Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.575Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.578Z"}
+{"level":"info","message":"GET /api/boletas/rifa/94d3a1c0-4b22-48f8-a3ad-46863662b716 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.590Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.654Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:50.657Z"}
+{"level":"info","message":"GET /api/boletas/rifa/94d3a1c0-4b22-48f8-a3ad-46863662b716 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.331Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.345Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.378Z"}
+{"level":"info","message":"GET /api/boletas/rifa/37e7b972-cf27-4db7-9516-1ad8cc1f1ad7 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.408Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.442Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.451Z"}
+{"level":"info","message":"GET /api/boletas/rifa/9fe62292-aa73-49a1-b0be-b04f34d399f9 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.571Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.580Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:51.584Z"}
+{"level":"info","message":"GET /api/boletas/rifa/37e7b972-cf27-4db7-9516-1ad8cc1f1ad7 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.326Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.329Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.333Z"}
+{"level":"info","message":"GET /api/boletas/rifa/05fb2a73-df2b-4923-af3c-97426a00e47c - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.441Z"}
+{"level":"info","message":"GET /api/boletas/rifa/9fe62292-aa73-49a1-b0be-b04f34d399f9 - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.453Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.480Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.489Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.492Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:52.500Z"}
+{"level":"info","message":"GET /api/boletas/rifa/05fb2a73-df2b-4923-af3c-97426a00e47c - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:51:53.762Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:51:53.828Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:51:53.853Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:52:01.126Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:52:01.146Z"}
+{"level":"info","message":"POST /api/uploads/imagen - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:53:44.201Z"}
+{"level":"info","message":"POST /api/rifas/be8f2051-2b22-4bfe-9ab6-24ee81fa38be/generate-boletas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:53:44.267Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:53:44.511Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:53:44.714Z"}
+{"level":"info","message":"Generated 1000 boletas for rifa be8f2051-2b22-4bfe-9ab6-24ee81fa38be","service":"rifas-backend","timestamp":"2026-02-22T22:53:47.333Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:53:51.629Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:53:51.660Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:54:02.192Z"}
+{"level":"info","message":"GET /api/rifas - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:54:02.202Z"}
+{"level":"info","message":"GET /api/boletas/rifa/be8f2051-2b22-4bfe-9ab6-24ee81fa38be/full-status - ::1","service":"rifas-backend","timestamp":"2026-02-22T22:54:04.975Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:54:04.993Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:54:04.998Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:54:51.112Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:54:51.120Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:54:51.125Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T22:59:51.178Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T22:59:51.229Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T22:59:51.232Z"}
+{"level":"info","message":"Connected to PostgreSQL database","service":"rifas-backend","timestamp":"2026-02-22T23:04:51.554Z"}
+{"level":"info","message":"[AUTO] 0 boletas bloqueadas liberadas (sin cliente)","service":"rifas-backend","timestamp":"2026-02-22T23:04:51.673Z"}
+{"level":"info","message":"[AUTO] 0 reservas formales liberadas y desvinculadas","service":"rifas-backend","timestamp":"2026-02-22T23:04:51.683Z"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","service":"rifas-backend","timestamp":"2026-02-22T23:09:31.415Z"}

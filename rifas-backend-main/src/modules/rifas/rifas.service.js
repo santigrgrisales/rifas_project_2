@@ -166,35 +166,33 @@ class RifaService {
       if (rifa.total_boletas === 10000) {
         // Para 10000 boletas, generar de 0 a 9999 (4 cifras)
         boletaQuery = `
-          INSERT INTO boletas (rifa_id, numero, estado, qr_url, barcode, imagen_url, created_at, updated_at)
-          SELECT 
-            $1::uuid as rifa_id, 
-            generate_series as numero, 
-            'DISPONIBLE',
-            'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' || $2 || '/' || $1 || '/' || generate_series,
-            'BOLETA-' || $1 || '-' || LPAD(generate_series::text, 4, '0'),
-            $3,
-            CURRENT_TIMESTAMP, 
-            CURRENT_TIMESTAMP
-          FROM generate_series(0, 9999)
-        `;
-        boletaParams = [rifaId, qr_base_url, imagen_url];
+  INSERT INTO boletas (rifa_id, numero, estado, qr_url, barcode, imagen_url, created_at, updated_at)
+  SELECT 
+    $1::uuid as rifa_id, 
+    generate_series as numero, 
+    'DISPONIBLE',
+    'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' || $2,
+    'R' || SUBSTRING($1::text, 1, 4) || '-' || LPAD(generate_series::text, 4, '0'),    $3,
+    CURRENT_TIMESTAMP, 
+    CURRENT_TIMESTAMP
+  FROM generate_series(0, 9999)
+`;
+boletaParams = [rifaId, qr_base_url, imagen_url];
       } else {
         // Para otros casos, generar de 1 a total_boletas
         boletaQuery = `
-          INSERT INTO boletas (rifa_id, numero, estado, qr_url, barcode, imagen_url, created_at, updated_at)
-          SELECT 
-            $1::uuid as rifa_id, 
-            generate_series as numero, 
-            'DISPONIBLE',
-            'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' || $3 || '/' || $1 || '/' || generate_series,
-            'BOLETA-' || $1 || '-' || LPAD(generate_series::text, 4, '0'),
-            $4,
-            CURRENT_TIMESTAMP, 
-            CURRENT_TIMESTAMP
-          FROM generate_series(1, $2)
-        `;
-        boletaParams = [rifaId, rifa.total_boletas, qr_base_url, imagen_url];
+  INSERT INTO boletas (rifa_id, numero, estado, qr_url, barcode, imagen_url, created_at, updated_at)
+  SELECT 
+    $1::uuid as rifa_id, 
+    generate_series as numero, 
+    'DISPONIBLE',
+    'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' || $3,
+    'R' || SUBSTRING($1::text, 1, 4) || '-' || LPAD(generate_series::text, 4, '0'),    $4,
+    CURRENT_TIMESTAMP, 
+    CURRENT_TIMESTAMP
+  FROM generate_series(1, $2)
+`;
+boletaParams = [rifaId, rifa.total_boletas, qr_base_url, imagen_url];
       }
       
       const result = await tx.query(boletaQuery, boletaParams);

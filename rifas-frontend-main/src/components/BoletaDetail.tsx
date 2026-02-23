@@ -66,14 +66,16 @@ export default function BoletaDetail({ boleta, onPrint }: BoletaDetailProps) {
         </div>
         
         <BoletaTicket
-          qrUrl={boleta.qr_url}
-          barcode={boleta.barcode}
-          numero={boleta.numero}
-          imagenUrl={(boleta as { imagen_url?: string | null }).imagen_url ?? (boleta as { imagenUrl?: string | null }).imagenUrl}
-          rifaNombre={boleta.rifa_nombre}
-          estado={boleta.estado}
-          clienteInfo={boleta.cliente_info}
-        />
+  qrUrl={boleta.qr_url}
+  barcode={boleta.barcode}
+  numero={boleta.numero}
+  imagenUrl={(boleta as any).imagen_url ?? (boleta as any).imagenUrl}
+  rifaNombre={boleta.rifa_nombre}
+  estado={boleta.estado}
+  clienteInfo={boleta.cliente_info}
+  deuda={boleta.venta_info?.saldo_pendiente}
+  reservadaHasta={boleta.bloqueo_hasta}
+/>
       </div>
 
       {/* Detailed Information */}
